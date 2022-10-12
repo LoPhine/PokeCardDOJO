@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.main.bylivedata.MainLiveDataActivity"/>
+        <activity android:name=".ui.main.bylivedata.HomeByLiveDataActivity"/>
     </application>
 
 </manifest>

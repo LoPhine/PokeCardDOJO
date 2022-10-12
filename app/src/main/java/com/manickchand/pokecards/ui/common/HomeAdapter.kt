@@ -1,4 +1,4 @@
-package com.manickchand.pokecards.ui.main.bylivedata
+package com.manickchand.pokecards.ui.common
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,8 +7,8 @@ import com.manickchand.pokecards.databinding.ItemPokemonBinding
 import com.manickchand.pokecards.model.PokemonModel
 import com.manickchand.pokecards.utils.loadGlideImage
 
-class MainAdapter(private val items: List<PokemonModel>, private val listener: MainListener) :
-    RecyclerView.Adapter<MainAdapter.ViewHolder?>() {
+class HomeAdapter(private val items: List<PokemonModel>, private val listener: HomeListener) :
+    RecyclerView.Adapter<HomeAdapter.ViewHolder?>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 

@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.manickchand.pokecards.databinding.ActivitySelectMainBinding
-import com.manickchand.pokecards.ui.main.bylivedata.MainLiveDataActivity
+import com.manickchand.pokecards.ui.main.bylivedata.HomeByLiveDataActivity
 
 class MainSelectActivity : AppCompatActivity() {
 
@@ -19,7 +19,7 @@ class MainSelectActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.goToLiveDataMain.setOnClickListener {
-            startActivity(Intent(this, MainLiveDataActivity::class.java))
+            startActivity(Intent(this, HomeByLiveDataActivity::class.java))
         }
 
         binding.goToViewStateMain.setOnClickListener {

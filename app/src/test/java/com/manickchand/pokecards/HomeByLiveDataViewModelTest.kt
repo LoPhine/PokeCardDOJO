@@ -5,7 +5,7 @@ import android.content.res.Resources
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.manickchand.pokecards.model.PokemonModel
 import com.manickchand.pokecards.repository.PokeCardsRepositoryImpl
-import com.manickchand.pokecards.ui.main.bylivedata.MainViewModel
+import com.manickchand.pokecards.ui.main.bylivedata.HomeByLiveDataViewModel
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.Dispatchers
@@ -20,10 +20,10 @@ import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class MainViewModelTest {
+class HomeByLiveDataViewModelTest {
 
     private val pokeCardsRepositoryImpl: PokeCardsRepositoryImpl = mock()
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: HomeByLiveDataViewModel
     private val contextMock: Context = mock()
     private val mockResources: Resources = mock()
 
@@ -34,7 +34,7 @@ class MainViewModelTest {
     fun before(){
         whenever(contextMock.resources).thenReturn(mockResources)
         Dispatchers.setMain(TestCoroutineDispatcher())
-        viewModel = MainViewModel(pokeCardsRepositoryImpl)
+        viewModel = HomeByLiveDataViewModel(pokeCardsRepositoryImpl)
     }
 
     @Test
