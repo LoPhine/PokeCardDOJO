@@ -5,6 +5,7 @@ import com.manickchand.pokecards.repository.PokeCardsRepositoryImpl
 import com.manickchand.pokecards.ui.main.bygenericviewstate.HomeByGenericViewStateViewModel
 import com.manickchand.pokecards.ui.main.byinterface.HomeByInterfaceViewModel
 import com.manickchand.pokecards.ui.main.bylivedata.HomeByLiveDataViewModel
+import com.manickchand.pokecards.ui.main.byviewstate.HomeByViewStateViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -26,4 +27,5 @@ val pokeCardsModules = module {
     viewModel { HomeByLiveDataViewModel(get()) }
     viewModel { HomeByGenericViewStateViewModel(get()) }
     viewModel { HomeByInterfaceViewModel(get()) }
+    viewModel { HomeByViewStateViewModel(get()) }
 }

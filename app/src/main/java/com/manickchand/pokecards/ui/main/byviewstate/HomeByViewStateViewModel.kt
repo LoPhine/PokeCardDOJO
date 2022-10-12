@@ -1,4 +1,4 @@
-package com.manickchand.pokecards.ui.main.bylivedata
+package com.manickchand.pokecards.ui.main.byviewstate
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -9,14 +9,12 @@ import com.manickchand.pokecards.repository.PokeCardsRepositoryImpl
 import com.manickchand.pokecards.ui.common.HomeBaseViewModel
 import kotlinx.coroutines.launch
 
-class HomeByLiveDataViewModel(private val pokeCardsRepositoryImpl: PokeCardsRepositoryImpl) :
+class HomeByViewStateViewModel(private val pokeCardsRepositoryImpl: PokeCardsRepositoryImpl) :
     HomeBaseViewModel() {
 
     private val pokemonLiveData = MutableLiveData<List<PokemonModel>>()
-    private val errorLiveData = MutableLiveData<Boolean>()
 
     fun getPokemonLiveData() = pokemonLiveData as LiveData<List<PokemonModel>>
-    fun getErrorLiveData() = errorLiveData as LiveData<Boolean>
 
     override fun fetchPokemons(context: Context) {
         viewModelScope.launch {
@@ -24,19 +22,26 @@ class HomeByLiveDataViewModel(private val pokeCardsRepositoryImpl: PokeCardsRepo
                 var response = pokeCardsRepositoryImpl.getPokemons()
                 if (!response.isNullOrEmpty()) {
                     setAllPokemonsList(context, response)
-                    pokemonLiveData.value = allPokemonsList
-                    errorLiveData.value = false
+                    //TODO
                 } else {
-                    pokemonLiveData.value = emptyList()
+                    //TODO
                 }
 
             } catch (e: Exception) {
-                errorLiveData.value = true
+
             }
         }
     }
 
     override fun filterList(filterStr: String?) {
-        pokemonLiveData.value = getListFiltered(filterStr)
+        val list = getListFiltered(filterStr)
+        //TODO
+    }
+
+    sealed class HomeViewState() {
+        class Success(Data: List<PokemonModel>) : HomeViewState()
+        object PokemonsListEmpty : HomeViewState()
+        object Error : HomeViewState()
+        object Loading : HomeViewState()
     }
 }

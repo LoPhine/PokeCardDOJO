@@ -7,6 +7,7 @@ import com.manickchand.pokecards.databinding.ActivitySelectMainBinding
 import com.manickchand.pokecards.ui.main.bygenericviewstate.HomeByGenericViewStateActivity
 import com.manickchand.pokecards.ui.main.byinterface.HomeByInterfaceActivity
 import com.manickchand.pokecards.ui.main.bylivedata.HomeByLiveDataActivity
+import com.manickchand.pokecards.ui.main.byviewstate.HomeByViewStateActivity
 
 class MainSelectActivity : AppCompatActivity() {
 
@@ -25,7 +26,7 @@ class MainSelectActivity : AppCompatActivity() {
         }
 
         binding.goToViewStateMain.setOnClickListener {
-            //TODO
+            startActivity(Intent(this, HomeByViewStateActivity::class.java))
         }
 
         binding.goToGenericViewStateMain.setOnClickListener {

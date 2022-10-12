@@ -1,10 +1,7 @@
 package com.manickchand.pokecards.ui.main.byinterface
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.manickchand.pokecards.model.PokemonModel
 import com.manickchand.pokecards.repository.PokeCardsRepositoryImpl
 import com.manickchand.pokecards.ui.common.HomeBaseViewModel
 import kotlinx.coroutines.launch
@@ -30,11 +27,7 @@ class HomeByInterfaceViewModel(private val pokeCardsRepositoryImpl: PokeCardsRep
     }
 
     fun filterList(filterStr: String?, resultListener: HomeByInterfaceListener) {
-        val list = filterStr?.run {
-            allPokemonsList.filter { pokemon ->
-                pokemon.name.toLowerCase().contains(filterStr.toLowerCase())
-            }
-        } ?: allPokemonsList
+        val list = getListFiltered(filterStr)
 
         resultListener.setPokemons(list)
     }

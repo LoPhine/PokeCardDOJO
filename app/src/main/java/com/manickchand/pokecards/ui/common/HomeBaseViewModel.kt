@@ -23,4 +23,12 @@ open class HomeBaseViewModel : ViewModel() {
             it.color = getPokemonColor(context, it.typeofpokemon.firstOrNull() ?: "")
         }
     }
+
+    fun getListFiltered(filterStr: String?): List<PokemonModel> {
+        return filterStr?.run {
+            allPokemonsList.filter { pokemon ->
+                pokemon.name.toLowerCase().contains(filterStr.toLowerCase())
+            }
+        } ?: allPokemonsList
+    }
 }

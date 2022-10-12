@@ -36,11 +36,7 @@ class HomeByGenericViewStateViewModel(private val pokeCardsRepositoryImpl: PokeC
 
     override fun filterList(filterStr: String?) {
 
-        val list = filterStr?.run {
-            allPokemonsList.filter { pokemon ->
-                pokemon.name.toLowerCase().contains(filterStr.toLowerCase())
-            }
-        } ?: allPokemonsList
+        val list = getListFiltered(filterStr)
 
         pokemonLiveData.value = ViewState.Success(list)
     }
