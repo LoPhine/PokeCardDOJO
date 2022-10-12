@@ -1,4 +1,4 @@
-package com.manickchand.pokecards.ui.main
+package com.manickchand.pokecards.ui.main.bylivedata
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

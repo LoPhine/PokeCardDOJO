@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">PokeCards</string>
     <string name="search_title">Pesquisar</string>
+    <string name="dumb_view">DumbViews</string>
+    <string name="livedata_main">Livedata</string>
+    <string name="viewstate_main">View state específicos</string>
+    <string name="generic_viewstate_main">View stete genérico</string>
+    <string name="interface_main">Interface</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.manickchand.pokecards.ui.main
+package com.manickchand.pokecards.ui.main.bylivedata
 
 import android.os.Bundle
 import android.text.Editable
@@ -10,7 +10,7 @@ import com.manickchand.pokecards.ui.detail.DetailDialogFragment
 import com.manickchand.pokecards.utils.showToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity(), MainListener {
+class MainLiveDataActivity : AppCompatActivity(), MainListener {
 
     private val viewModel: MainViewModel by viewModel()
     private val pokemonsList = ArrayList<PokemonModel>()
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), MainListener {
         binding.load.apply {
             isRefreshing = true
             setOnRefreshListener {
-                viewModel.fetchPokemons(this@MainActivity)
+                viewModel.fetchPokemons(this@MainLiveDataActivity)
             }
         }
     }
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity(), MainListener {
     private fun setupRecycler() =
         with(binding.recycler) {
             setHasFixedSize(true)
-            adapter = MainAdapter(pokemonsList, this@MainActivity)
+            adapter = MainAdapter(pokemonsList, this@MainLiveDataActivity)
         }
 
     private fun showItems(pokemons: List<PokemonModel>) {

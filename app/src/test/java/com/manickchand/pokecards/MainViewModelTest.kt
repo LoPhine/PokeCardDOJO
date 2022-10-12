@@ -5,7 +5,7 @@ import android.content.res.Resources
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.manickchand.pokecards.model.PokemonModel
 import com.manickchand.pokecards.repository.PokeCardsRepositoryImpl
-import com.manickchand.pokecards.ui.main.MainViewModel
+import com.manickchand.pokecards.ui.main.bylivedata.MainViewModel
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.Dispatchers
