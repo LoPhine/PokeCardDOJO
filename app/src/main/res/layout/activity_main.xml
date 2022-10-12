@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
 
-    <include layout="@layout/header"/>
+    <include
+        android:id="@+id/ll_header"
+        layout="@layout/header" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/load"

@@ -7,12 +7,17 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import com.manickchand.pokecards.R
+import com.manickchand.pokecards.databinding.FragmentDetailBinding
 import com.manickchand.pokecards.model.PokemonModel
 import com.manickchand.pokecards.utils.loadGlideImage
-import kotlinx.android.synthetic.main.fragment_detail.*
 
 class DetailDialogFragment : DialogFragment() {
+
+    private val binding: FragmentDetailBinding by lazy {
+        FragmentDetailBinding.inflate(
+            layoutInflater
+        )
+    }
 
     private val pokemonModel by lazy { requireArguments().getSerializable(EXTRA_POKEMON) as PokemonModel }
 
@@ -30,7 +35,7 @@ class DetailDialogFragment : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_detail, container, false)
+    ) = binding.root
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,31 +48,31 @@ class DetailDialogFragment : DialogFragment() {
 
         pokemonModel.run {
 
-            tv_name.text = name
-            iv_pokemon.loadGlideImage(requireContext(), imageurl)
-            tv_description.text = xdescription
+            binding.tvName.text = name
+            binding.ivPokemon.loadGlideImage(requireContext(), imageurl)
+            binding.tvDescription.text = xdescription
 
-            tv_type.apply {
+            binding.tvType.apply {
                 text = typeofpokemon.first()
                 setTextColor(color)
             }
 
-            tv_hp.apply {
+            binding.tvHp.apply {
                 text = hp.toString()
                 setTextColor(color)
             }
 
-            tv_df.apply {
+            binding.tvDf.apply {
                 text = defense.toString()
                 setTextColor(color)
             }
 
-            tv_at.apply {
+            binding.tvAt.apply {
                 text = attack.toString()
                 setTextColor(color)
             }
 
-            card_detail_pokemon.setCardBackgroundColor(color)
+            binding.cardDetailPokemon.setCardBackgroundColor(color)
         }
     }
 

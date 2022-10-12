@@ -3,43 +3,52 @@ package com.manickchand.pokecards.ui.main
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.manickchand.pokecards.R
-import com.manickchand.pokecards.utils.loadGlideImage
+import com.manickchand.pokecards.databinding.ItemPokemonBinding
 import com.manickchand.pokecards.model.PokemonModel
-import kotlinx.android.synthetic.main.item_pokemon.view.*
+import com.manickchand.pokecards.utils.loadGlideImage
 
-class MainAdapter( private val items: List<PokemonModel>, private val listener: MainListener) : RecyclerView.Adapter<MainAdapter.ViewHolder?>() {
+class MainAdapter(private val items: List<PokemonModel>, private val listener: MainListener) :
+    RecyclerView.Adapter<MainAdapter.ViewHolder?>() {
 
-    inner class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(inflateLayout(parent)) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        fun bind(pokemon: PokemonModel) = with(itemView) {
+        val itemBinding = ItemPokemonBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
 
-            pokemon.run {
-
-                iv_pokemon.apply {
-                    loadGlideImage(context, imageurl)
-                    setBackgroundColor(color)
-                }
-                tv_pokemon.text = name
-
-                tv_hp.apply {
-                    text = hp.toString()
-                    setTextColor(color)
-                }
-
-                card_pokemon.setOnClickListener { listener.clickPokemon(this) }
-            }
-        }
-
+        return ViewHolder(itemBinding)
     }
 
-    private fun inflateLayout(parent: ViewGroup) =
-        LayoutInflater.from(parent.context).inflate(R.layout.item_pokemon, parent, false)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(parent)
     override fun getItemCount() = items.size
+
     override fun onBindViewHolder(
         holder: ViewHolder,
         position: Int
     ) = holder.bind(items[position])
+
+    inner class ViewHolder(private val binding: ItemPokemonBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(pokemon: PokemonModel) {
+
+            pokemon.run {
+
+                binding.ivPokemon.apply {
+                    loadGlideImage(context, imageurl)
+                    setBackgroundColor(color)
+                }
+                binding.tvPokemon.text = name
+
+                binding.tvHp.apply {
+                    text = hp.toString()
+                    setTextColor(color)
+                }
+
+                binding.cardPokemon.setOnClickListener { listener.clickPokemon(this) }
+            }
+        }
+
+    }
 }
