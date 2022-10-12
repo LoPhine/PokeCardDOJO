@@ -8,17 +8,27 @@ import com.manickchand.pokecards.databinding.ActivityMainBinding
 import com.manickchand.pokecards.model.PokemonModel
 import com.manickchand.pokecards.ui.detail.DetailDialogFragment
 
+const val TAG_LOG = "DUMBVIEWSTARTED"
+
 open class HomeBaseActivity : AppCompatActivity(), HomeListener {
 
     val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     var baseViewModel: HomeBaseViewModel? = null
+    val pokemonsList = ArrayList<PokemonModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupRefresh()
         setupFilter()
+        setupRecycler()
     }
+
+    private fun setupRecycler() =
+        with(binding.recycler) {
+            setHasFixedSize(true)
+            adapter = HomeAdapter(pokemonsList, this@HomeBaseActivity)
+        }
 
     private fun setupRefresh() {
         binding.load.apply {
@@ -27,6 +37,12 @@ open class HomeBaseActivity : AppCompatActivity(), HomeListener {
                 baseViewModel?.fetchPokemons(this@HomeBaseActivity)
             }
         }
+    }
+
+    fun showItems(pokemons: List<PokemonModel>) {
+        pokemonsList.clear()
+        pokemonsList.addAll(pokemons)
+        binding.recycler.adapter?.notifyDataSetChanged()
     }
 
     override fun clickPokemon(pokemonModel: PokemonModel) {

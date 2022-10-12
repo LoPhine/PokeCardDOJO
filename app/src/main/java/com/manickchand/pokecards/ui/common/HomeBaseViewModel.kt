@@ -11,7 +11,14 @@ open class HomeBaseViewModel : ViewModel() {
 
     open fun fetchPokemons(context: Context) {}
     open fun filterList(filterStr: String?) {}
-    open fun setColorPokemons(context: Context) {
+
+    fun setAllPokemonsList(context: Context, pokemons: List<PokemonModel>) {
+        allPokemonsList.clear()
+        allPokemonsList.addAll(pokemons)
+        setColorPokemons(context)
+    }
+
+    private fun setColorPokemons(context: Context) {
         allPokemonsList.forEach {
             it.color = getPokemonColor(context, it.typeofpokemon.firstOrNull() ?: "")
         }

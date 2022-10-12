@@ -1,22 +1,22 @@
 package com.manickchand.pokecards.ui.main.bylivedata
 
 import android.os.Bundle
-import com.manickchand.pokecards.model.PokemonModel
-import com.manickchand.pokecards.ui.common.HomeAdapter
+import android.util.Log
 import com.manickchand.pokecards.ui.common.HomeBaseActivity
+import com.manickchand.pokecards.ui.common.TAG_LOG
 import com.manickchand.pokecards.utils.showToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeByLiveDataActivity : HomeBaseActivity() {
 
     private val viewModel: HomeByLiveDataViewModel by viewModel()
-    private val pokemonsList = ArrayList<PokemonModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.i(TAG_LOG, "INICIANDO DUMB VIEW POR LIVE DATA")
         baseViewModel = viewModel
 
-        setupRecycler()
         bindObservables()
         viewModel.fetchPokemons(this)
     }
@@ -31,18 +31,6 @@ class HomeByLiveDataActivity : HomeBaseActivity() {
             binding.load.isRefreshing = false
             if (isError) showToast("Erro ao carregar pokemons")
         })
-    }
-
-    private fun setupRecycler() =
-        with(binding.recycler) {
-            setHasFixedSize(true)
-            adapter = HomeAdapter(pokemonsList, this@HomeByLiveDataActivity)
-        }
-
-    private fun showItems(pokemons: List<PokemonModel>) {
-        pokemonsList.clear()
-        pokemonsList.addAll(pokemons)
-        binding.recycler.adapter?.notifyDataSetChanged()
     }
 
 }

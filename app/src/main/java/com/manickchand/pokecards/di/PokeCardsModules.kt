@@ -2,6 +2,7 @@ package com.manickchand.pokecards.di
 
 import com.manickchand.pokecards.repository.PokeCardsRemoteSource
 import com.manickchand.pokecards.repository.PokeCardsRepositoryImpl
+import com.manickchand.pokecards.ui.main.bygenericviewstate.HomeByGenericViewStateViewModel
 import com.manickchand.pokecards.ui.main.bylivedata.HomeByLiveDataViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -22,4 +23,5 @@ val pokeCardsModules = module {
     factory { PokeCardsRepositoryImpl(get()) }
 
     viewModel { HomeByLiveDataViewModel(get()) }
+    viewModel { HomeByGenericViewStateViewModel(get()) }
 }

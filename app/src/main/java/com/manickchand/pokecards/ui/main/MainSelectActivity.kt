@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.manickchand.pokecards.databinding.ActivitySelectMainBinding
+import com.manickchand.pokecards.ui.main.bygenericviewstate.HomeByGenericViewStateActivity
 import com.manickchand.pokecards.ui.main.bylivedata.HomeByLiveDataActivity
 
 class MainSelectActivity : AppCompatActivity() {
@@ -27,7 +28,7 @@ class MainSelectActivity : AppCompatActivity() {
         }
 
         binding.goToGenericViewStateMain.setOnClickListener {
-            //TODO
+            startActivity(Intent(this, HomeByGenericViewStateActivity::class.java))
         }
 
         binding.goToInterfaceMain.setOnClickListener {

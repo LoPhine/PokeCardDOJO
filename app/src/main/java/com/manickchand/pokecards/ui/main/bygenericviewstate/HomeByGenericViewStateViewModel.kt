@@ -1,4 +1,4 @@
-package com.manickchand.pokecards.ui.main.bylivedata
+package com.manickchand.pokecards.ui.main.bygenericviewstate
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -9,38 +9,39 @@ import com.manickchand.pokecards.repository.PokeCardsRepositoryImpl
 import com.manickchand.pokecards.ui.common.HomeBaseViewModel
 import kotlinx.coroutines.launch
 
-class HomeByLiveDataViewModel(private val pokeCardsRepositoryImpl: PokeCardsRepositoryImpl) :
+class HomeByGenericViewStateViewModel(private val pokeCardsRepositoryImpl: PokeCardsRepositoryImpl) :
     HomeBaseViewModel() {
 
-    private val pokemonLiveData = MutableLiveData<List<PokemonModel>>()
-    private val errorLiveData = MutableLiveData<Boolean>()
+    private val pokemonLiveData = MutableLiveData<ViewState<List<PokemonModel>>>()
 
-    fun getPokemonLiveData() = pokemonLiveData as LiveData<List<PokemonModel>>
-    fun getErrorLiveData() = errorLiveData as LiveData<Boolean>
+    fun getPokemonLiveData() = pokemonLiveData as LiveData<ViewState<List<PokemonModel>>>
 
     override fun fetchPokemons(context: Context) {
         viewModelScope.launch {
             try {
+                pokemonLiveData.value = ViewState.Loading
                 var response = pokeCardsRepositoryImpl.getPokemons()
                 if (!response.isNullOrEmpty()) {
                     setAllPokemonsList(context, response)
-                    pokemonLiveData.value = allPokemonsList
-                    errorLiveData.value = false
+                    pokemonLiveData.value = ViewState.Success(response)
                 } else {
-                    pokemonLiveData.value = emptyList()
+                    pokemonLiveData.value = ViewState.Success(emptyList())
                 }
 
             } catch (e: Exception) {
-                errorLiveData.value = true
+                pokemonLiveData.value = ViewState.Failed(e)
             }
         }
     }
 
     override fun filterList(filterStr: String?) {
-        pokemonLiveData.value = filterStr?.run {
+
+        val list = filterStr?.run {
             allPokemonsList.filter { pokemon ->
                 pokemon.name.toLowerCase().contains(filterStr.toLowerCase())
             }
         } ?: allPokemonsList
+
+        pokemonLiveData.value = ViewState.Success(list)
     }
 }

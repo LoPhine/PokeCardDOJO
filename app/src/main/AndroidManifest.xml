@@ -22,6 +22,7 @@
         </activity>
 
         <activity android:name=".ui.main.bylivedata.HomeByLiveDataActivity"/>
+        <activity android:name=".ui.main.bygenericviewstate.HomeByGenericViewStateActivity"/>
     </application>
 
 </manifest>
