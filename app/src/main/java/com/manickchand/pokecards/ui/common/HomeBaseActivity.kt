@@ -14,7 +14,7 @@ open class HomeBaseActivity : AppCompatActivity(), HomeListener {
 
     val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     var baseViewModel: HomeBaseViewModel? = null
-    val pokemonsList = ArrayList<PokemonModel>()
+    private val pokemonsList = ArrayList<PokemonModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,6 @@ open class HomeBaseActivity : AppCompatActivity(), HomeListener {
 
     private fun setupRefresh() {
         binding.load.apply {
-            isRefreshing = true
             setOnRefreshListener {
                 baseViewModel?.fetchPokemons(this@HomeBaseActivity)
             }
